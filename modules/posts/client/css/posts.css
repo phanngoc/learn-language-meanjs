@@ -1,0 +1,59 @@
+.clearfix:after {
+  content: ".";
+  visibility: hidden;
+  display: block;
+  clear: both;
+  height: 0;
+  font-size: 0;
+}
+
+form[name=articleForm] {
+  padding: 10px;
+  border: 3px solid #D0D0D0;
+  margin-top: 10px;
+  margin-bottom: 11px;
+  border-radius: 5px;
+}
+
+p.title-post-current {
+  font-size: 22px;
+  color :#D25656;
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  float: left;
+  width: 90%;
+}
+
+div.post-current {
+  padding: 10px;
+  border: 3px solid #D0D0D0;
+  margin-top: 10px;
+  margin-bottom: 11px;
+  border-radius: 5px;  
+}
+
+div.post-current .header {
+  border-bottom: 1px dotted #C6B2B2;
+  padding-bottom: 15px;
+}
+
+div.post-current .header .remove-current {
+  font-size: 22px;
+  color: #83A9E3;
+  display:block;
+  width:27px;
+  float:left;
+}
+
+div.post-current .body-language {
+  display: block;
+}
+
+div.post-current .footer audio {
+  width: 100%;
+}
+
+div.post-current .wrap-row {
+  border-bottom: 1px solid #D096DF;
+}
