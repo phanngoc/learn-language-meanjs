@@ -13,6 +13,7 @@ form[name=articleForm] {
   margin-top: 10px;
   margin-bottom: 11px;
   border-radius: 5px;
+  background-color: white;
 }
 
 p.title-post-current {
@@ -56,4 +57,30 @@ div.post-current .footer audio {
 
 div.post-current .wrap-row {
   border-bottom: 1px solid #D096DF;
+}
+
+.page-header h1{
+  color : white;
+  font-weight : bold;
+  font-size : 26px;
+  background-color : #4591cc;
+  padding : 6px 0px 10px 64px;
+  font: 18px/1.5 "Frutiger Neue W02 Book",Arial,Helvetica,sans-serif;
+}
+
+div.list-group a{
+  background: -moz-linear-gradient(top, rgba(255,116,0,0.68) 2%, rgba(255,155,73,0.68) 21%, rgba(255,125,18,0.68) 81%, rgba(255,116,0,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(255,116,0,0.68) 2%,rgba(255,155,73,0.68) 21%,rgba(255,125,18,0.68) 81%,rgba(255,116,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(255,116,0,0.68) 2%,rgba(255,155,73,0.68) 21%,rgba(255,125,18,0.68) 81%,rgba(255,116,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#adff7400', endColorstr='#ff7400',GradientType=0 ); /* IE6-9 */  
+  color : white;
+  font-weight: bold;
+}
+
+body {
+  background: #e2e2e2;
+}
+
+div.post-current {
+  background-color: white;
 }

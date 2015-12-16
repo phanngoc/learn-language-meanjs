@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 var posts = require('../controllers/posts.server.controller');
-
+var postsPolicy = require('../policies/posts.server.policy');
 module.exports = function (app) {
   // Articles collection routes
-  app.route('/api/posts') //.all(articlesPolicy.isAllowed)
+  app.route('/api/posts').all(postsPolicy.isAllowed)
     .get(posts.list)
     .post(posts.create);
 
@@ -19,7 +19,7 @@ module.exports = function (app) {
   .get(posts.getRandomPost);
 
   // Single article routes
-  app.route('/api/posts/:postId') //.all(articlesPolicy.isAllowed)
+  app.route('/api/posts/:postId').all(postsPolicy.isAllowed)
     .get(posts.read)
     .put(posts.update)
     .delete(posts.delete);

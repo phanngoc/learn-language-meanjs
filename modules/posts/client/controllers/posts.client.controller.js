@@ -29,30 +29,38 @@ angular.module('posts')
 }).controller('MainController', ['$scope', '$stateParams', '$location', 'Authentication', 'Posts', 'ActPosts',
   function ($scope, $stateParams, $location, Authentication, Posts, ActPosts) {
 
+    $scope.mopost = {title:"",content1:"",content2:"",linkaudio:""};
+
+    $scope.username = "";
+
     $scope.authentication = Authentication;
-    console.log(Authentication); 
+
+    if ($scope.authentication.user === '') {
+      $scope.isAuth = false;
+    } else {
+      $scope.isAuth = true;
+    }
+  
     $scope.isCreation = true;
+
     // Create new Post
     $scope.create = function () {
       $scope.error = null;
 
       // Create new Post object
       var post = new Posts({
-        title: this.title,
-        content1: this.content1,
-        content2: this.content2,
-        linkaudio: this.linkaudio
+        title: $scope.mopost.title,
+        content1: $scope.mopost.content1,
+        content2: $scope.mopost.content2,
+        linkaudio: $scope.mopost.linkaudio
       });
 
       // Redirect after save
       post.$save(function (response) {
         $scope.find();
-
+        console.log('save complete');
         // Clear form fields
-        $scope.title = '';
-        $scope.content1 = '';
-        $scope.content2 = '';
-        $scope.linkaudio = '';
+        $scope.resetform();
 
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
@@ -79,29 +87,24 @@ angular.module('posts')
     };
 
     $scope.editformupdate = function(postcurrent) {
-      this.title = postcurrent.title;
-      this.content1 = postcurrent.content1;
-      this.content2 = postcurrent.content2;
-      this.linkaudio = postcurrent.linkaudio;
+      angular.extend($scope.mopost,postcurrent);
       $scope.isCreation = false;
     };
 
     $scope.resetform = function() {
-      this.title = '';
-      this.content1 = '';
-      this.content2 = '';
-      this.linkaudio = '';
+      var objreset = {title : '',content1 : '',content2 : '',linkaudio : ''};
+      angular.extend($scope.mopost,objreset);
     };
+    
     // Update existing Article
     $scope.update = function (isValid) {
       $scope.isCreation = true;
       $scope.error = null;
-      $scope.postcurrent.title = this.title;
-      $scope.postcurrent.content1 = this.content1;
-      $scope.postcurrent.content2 = this.content2;
-      $scope.postcurrent.linkaudio = this.linkaudio;
+      
+      angular.extend($scope.postcurrent,$scope.mopost);
 
       var post = $scope.postcurrent;
+
       $scope.resetform();
 
       post.$update(function () {

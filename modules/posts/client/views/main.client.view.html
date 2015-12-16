@@ -1,4 +1,4 @@
-<section ng-controller="MainController" ng-init="find()">
+<section ng-controller="MainController as main" ng-init="find()">
 <div class="wrap">
   <div class="row">
 
@@ -19,32 +19,42 @@
 
     <div class="col-md-6">
       <div class="center-post">
-          <div class="area-add-post">
-            <form name="articleForm" class="form-horizontal" ng-submit="isCreation? create() : update()" novalidate>
+          <div ng-if="!isAuth" style="display:block;height:108px">
+            
+          </div>
+          <div class="area-add-post" ng-if="isAuth">
+            <form name="articleForm" class="form-horizontal" ng-submit="isCreation? create() : update()" novalidate >
               <header class="list-group-item-text">
                 <label>Title</label>
-                <input type="text" name="title" ng-model="title" class="form-control">
+                <input type="text" name="title" ng-model="$parent.mopost.title" class="form-control" required>
+                <span style="color:red" ng-show="articleForm.title.$dirty && articleForm.title.$invalid">Title is required.</span>
               </header>
+
               <div class="inner-language-para">
                   <div class="col-md-6 remove-padding">
                     <label for="content1">Study language</label>
-                    <textarea name="content1" ng-model="content1" class="form-control inner-content-left">
+                    <textarea name="content1" ng-model="$parent.mopost.content1" class="form-control inner-content-left" required>
                     </textarea>
+                    <span style="color:red" ng-show="articleForm.content1.$dirty && articleForm.content1.$invalid">Study language is required.</span>
                   </div>
                   <div class="col-md-6 remove-padding">
                     <label for="content2">Translate language</label>
-                    <textarea name="content2" ng-model="content2" class="form-control inner-content-right">
+                    <textarea name="content2" ng-model="$parent.mopost.content2" class="form-control inner-content-right">
                     </textarea>
                   </div>
               </div>
 
               <div class="inner-content-linkaudio">
                     <label for="linkaudio">Link audio</label>
-                    <input type="url" name="linkaudio" ng-model="linkaudio" class="form-control">
+                    <input type="url" name="linkaudio" ng-model="$parent.mopost.linkaudio" class="form-control" required>
+                    <div ng-messages="articleForm.linkaudio.$error" style="color:maroon" role="alert" ng-show="articleForm.linkaudio.$dirty && articleForm.linkaudio.$invalid">
+                      <div ng-message="required">Link audio is required.</div>
+                      <div ng-message="url">Link audio must be url</div>
+                    </div>
               </div>
 
               <div class="footer">
-                  <input type="submit" class="btn btn-default">
+                  <input type="submit" class="btn btn-default" ng-disabled="articleForm.$invalid">
               </div>
             </form>
           </div> <!-- .area-add-post-->
@@ -53,8 +63,8 @@
 
               <div class="header clearfix">
                   <p ng-bind="postcurrent.title" class="title-post-current"></p>  
-                  <a href="#" class="remove-current" ng-click="remove(postcurrent)"><i class="fa fa-times"></i></a>
-                  <a href="#" class="remove-current" ng-click="editformupdate(postcurrent)"><i class="fa fa-pencil-square-o"></i></a>
+                  <a href="#" class="remove-current" ng-click="remove(postcurrent)" ng-if="isAuth"><i class="fa fa-times"></i></a>
+                  <a href="#" class="remove-current" ng-click="editformupdate(postcurrent)" ng-if="isAuth"><i class="fa fa-pencil-square-o"></i></a>
 
               </div>
           
